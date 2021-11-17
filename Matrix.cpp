@@ -1,5 +1,6 @@
 #include "Matrix.h"
 #include <cassert>
+#include <fstream>
 
 // Stuff functions:
 unsigned int get_row2swap(const unsigned int index_diag, const Matrix& Any)
@@ -114,6 +115,12 @@ const unsigned int Matrix::get_rSize() const
 const unsigned int Matrix::get_cSize() const
 {
 	return this->coln;
+}
+
+void Matrix::at(unsigned int row, unsigned int col, const double value)
+{
+	assert((row < this->get_rSize()) && (col < this->get_cSize()) && "KEK");
+	this->at(row, col) = value;
 }
 
 double& Matrix::at(unsigned int row, unsigned int col)

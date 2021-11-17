@@ -3,7 +3,7 @@
 
 
 // 1) Constructors:
-Decomposition::Decomposition(const Matrix& any):LU   // LU можно убрать если что
+Decomposition::Decomposition(const Matrix& any)//:LU   // LU можно убрать если что
 {
     // 0. Checking of sizes. If matrix isn't square then error out!
     assert((any.get_cSize() == any.get_rSize()) && "ERROR_MATRIX_IS_NOT_SQUARE");
@@ -14,7 +14,6 @@ Decomposition::Decomposition(const Matrix& any):LU   // LU можно убрать если что
     this->values = { 10.0, -0.1, 1.0, 10.1 };   //  <- «аменить на LU разложение
     // ѕо умолчанию: (L\U) = { 10.0, -0.1, 1.0, 10.1 } - LU разложение дл€ матрицы ј = {10.0, -1.0, 1.0, 10.0}
 }
-
 
 // 2) Destructor:
 Decomposition::~Decomposition()

@@ -38,8 +38,12 @@ public:
 	// 3) Geters and seters:
 	const unsigned int get_rSize() const;
 	const unsigned int get_cSize() const;
+
 	double& at(unsigned int row, unsigned int col);
+
 	const double& at(unsigned int row, unsigned int col) const;
+	void at(unsigned int row, unsigned int col, const double value);
+
 	void set_column(unsigned int col, const Matrix& column); // должен изменять текущий объект
 
 	// 4) Other methods:
