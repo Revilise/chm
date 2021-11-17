@@ -135,16 +135,18 @@ const double& Matrix::at(unsigned int row, unsigned int col) const
 	return this->values.at(get_index(row, col));
 }
 
-void Matrix::set_column(unsigned int col, const Matrix& column)
+const Matrix Matrix::set_column(const unsigned int col, const Matrix& column) const
 {
 	// 0. Checking of the indexes:
 	assert((col < this->coln) && "ERROR_MATRIX_INDEX_IS_OUT_SIZE");
 	assert((column.rown == this->rown) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
 	assert((column.coln == 1) && "ERROR_MATRIX_SHOULD_BE_A_COLUMN");
-
+	Matrix Res = *this;
 	// 1. The column is inserted there:
-	this->values.erase(this->values.begin() + col * this->rown, this->values.begin() + (col + 1) * this->rown);
-	this->values.insert(this->values.begin() + col * this->rown, column.values.begin(), column.values.end());
+	Res.values.erase(Res.values.begin() + col * Res.rown, Res.values.begin() + (col + 1) * Res.rown);
+	Res.values.insert(Res.values.begin() + col * Res.rown, column.values.begin(), column.values.end());
+	
+	return Res;
 }
 
 // Функция рассчёта определителя методом исключения Гаусса.
