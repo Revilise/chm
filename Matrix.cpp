@@ -145,7 +145,7 @@ const Matrix Matrix::set_column(const unsigned int col, const Matrix& column) co
 	// 1. The column is inserted there:
 	Res.values.erase(Res.values.begin() + col * Res.rown, Res.values.begin() + (col + 1) * Res.rown);
 	Res.values.insert(Res.values.begin() + col * Res.rown, column.values.begin(), column.values.end());
-	
+
 	return Res;
 }
 

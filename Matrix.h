@@ -43,9 +43,8 @@ public:
 	void at(unsigned int row, unsigned int col, const double value);
 	const double& at(unsigned int row, unsigned int col) const;
 
-	void set_column(unsigned int col, const Matrix& column); // должен изменять текущий объект
-  
-  const Matrix set_column(const unsigned int col, const Matrix& column) const; // должен изменять текущий объект
+	const Matrix set_column(const unsigned int col, const Matrix& column) const;
+ 
 	// 4) Other methods:
 	const double det() const;
 	const double norm() const;

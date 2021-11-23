@@ -20,12 +20,12 @@ Matrix Solver::Cramer() // Метод крамера.
 	if(det != 0) // Если оперделитель не равен 0, то существует решение СЛАУ, и оно едиснтвенное
 	{
 		std::vector <double> values;
-		for(size_t i = 0; i < A.get_cSize(); i++)
+		for(int i = 0; i < A.get_cSize(); i++)
 		{
 			Matrix insult = A.set_column(i, B);
 			values.push_back(insult.det());
 		}
-		for(size_t i = 0; i < x_Cramer.get_rSize(); i++)
+		for(int i = 0; i < x_Cramer.get_rSize(); i++)
 		{
 			x_Cramer.at(i, 0) = values[i] / det;
 		}
