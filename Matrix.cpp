@@ -4,11 +4,11 @@
 
 // Stuff functions:
 unsigned int get_row2swap(const unsigned int index_diag, const Matrix& Any)
-// Функция осуществляет поиск номера строки на которую необходимо заменить рассматриваемую,
-// с нулевым диагональным элементом (поиск ненулевого элемента в столбце с номером index_diag).
+// Г”ГіГ­ГЄГ¶ГЁГї Г®Г±ГіГ№ГҐГ±ГІГўГ«ГїГҐГІ ГЇГ®ГЁГ±ГЄ Г­Г®Г¬ГҐГ°Г  Г±ГІГ°Г®ГЄГЁ Г­Г  ГЄГ®ГІГ®Г°ГіГѕ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® Г§Г Г¬ГҐГ­ГЁГІГј Г°Г Г±Г±Г¬Г ГІГ°ГЁГўГ ГҐГ¬ГіГѕ,
+// Г± Г­ГіГ«ГҐГўГ»Г¬ Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Г¬ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Г¬ (ГЇГ®ГЁГ±ГЄ Г­ГҐГ­ГіГ«ГҐГўГ®ГЈГ® ГЅГ«ГҐГ¬ГҐГ­ГІГ  Гў Г±ГІГ®Г«ГЎГ¶ГҐ Г± Г­Г®Г¬ГҐГ°Г®Г¬ index_diag).
 // 
-// Если вернувшееся значение из функции index2swap равняется количеству стрк в матрице =>
-// => определитель матрицы ноль!
+// Г…Г±Г«ГЁ ГўГҐГ°Г­ГіГўГёГҐГҐГ±Гї Г§Г­Г Г·ГҐГ­ГЁГҐ ГЁГ§ ГґГіГ­ГЄГ¶ГЁГЁ index2swap Г°Г ГўГ­ГїГҐГІГ±Гї ГЄГ®Г«ГЁГ·ГҐГ±ГІГўГі Г±ГІГ°ГЄ Гў Г¬Г ГІГ°ГЁГ¶ГҐ =>
+// => Г®ГЇГ°ГҐГ¤ГҐГ«ГЁГІГҐГ«Гј Г¬Г ГІГ°ГЁГ¶Г» Г­Г®Г«Гј!
 {
 	unsigned int index2swap = index_diag;
 	while ((index2swap < Any.get_rSize()) && (Any.at(index2swap, index_diag) == 0.0))
@@ -20,9 +20,9 @@ unsigned int get_row2swap(const unsigned int index_diag, const Matrix& Any)
 };
 
 bool swap_rows(const unsigned int index_diag, Matrix& Any)
-// Функция возвращает флаг bool:
-//		true, если была выполнена перестановка строк
-//		false, если перестановки строк не было
+// Г”ГіГ­ГЄГ¶ГЁГї ГўГ®Г§ГўГ°Г Г№Г ГҐГІ ГґГ«Г ГЈ bool:
+//		true, ГҐГ±Г«ГЁ ГЎГ»Г«Г  ГўГ»ГЇГ®Г«Г­ГҐГ­Г  ГЇГҐГ°ГҐГ±ГІГ Г­Г®ГўГЄГ  Г±ГІГ°Г®ГЄ
+//		false, ГҐГ±Г«ГЁ ГЇГҐГ°ГҐГ±ГІГ Г­Г®ГўГЄГЁ Г±ГІГ°Г®ГЄ Г­ГҐ ГЎГ»Г«Г®
 {
 	bool swap_flag = false;
 
@@ -30,10 +30,10 @@ bool swap_rows(const unsigned int index_diag, Matrix& Any)
 
 	if (index2swap != Any.get_rSize())
 	{
-		// Переключение флага:
+		// ГЏГҐГ°ГҐГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГґГ«Г ГЈГ :
 		swap_flag = true;
 
-		// Перестановка строк:
+		// ГЏГҐГ°ГҐГ±ГІГ Г­Г®ГўГЄГ  Г±ГІГ°Г®ГЄ:
 		double buffer_value;
 		for (size_t col = index_diag; col < Any.get_cSize(); col++)
 		{
@@ -54,7 +54,7 @@ void column_reset(const unsigned int index_diag, Matrix& Any)
 		swaped_value = Any.at(row, index_diag);
 		Any.at(row, index_diag) = 0.0;
 
-		for (size_t col = index_diag + 1; col < Any.get_cSize(); col++) // Была опечатка в индексах. Стартовый индекс был col = row, т.е. каждый раз происхоило смещение на + 1
+		for (size_t col = index_diag + 1; col < Any.get_cSize(); col++) // ГЃГ»Г«Г  Г®ГЇГҐГ·Г ГІГЄГ  Гў ГЁГ­Г¤ГҐГЄГ±Г Гµ. Г‘ГІГ Г°ГІГ®ГўГ»Г© ГЁГ­Г¤ГҐГЄГ± ГЎГ»Г« col = row, ГІ.ГҐ. ГЄГ Г¦Г¤Г»Г© Г°Г Г§ ГЇГ°Г®ГЁГ±ГµГ®ГЁГ«Г® Г±Г¬ГҐГ№ГҐГ­ГЁГҐ Г­Г  + 1
 		{
 			//add(Any, row, col, -swaped_value * Any.get_elem(index_diag, col));
 			Any.at(row, col) -= swaped_value * Any.at(index_diag, col);
@@ -62,7 +62,7 @@ void column_reset(const unsigned int index_diag, Matrix& Any)
 	}
 }
 
-// Добавленна функция, которая делит строку на диагональный элемент и корректирует значение определеителя
+// Г„Г®ГЎГ ГўГ«ГҐГ­Г­Г  ГґГіГ­ГЄГ¶ГЁГї, ГЄГ®ГІГ®Г°Г Гї Г¤ГҐГ«ГЁГІ Г±ГІГ°Г®ГЄГі Г­Г  Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ ГЁ ГЄГ®Г°Г°ГҐГЄГІГЁГ°ГіГҐГІ Г§Г­Г Г·ГҐГ­ГЁГҐ Г®ГЇГ°ГҐГ¤ГҐГ«ГҐГЁГІГҐГ«Гї
 void row_sub(const unsigned int index_diag, double& det_value, Matrix& Copy)
 {
 	const double value_diag = Copy.at(index_diag, index_diag);
@@ -70,7 +70,7 @@ void row_sub(const unsigned int index_diag, double& det_value, Matrix& Copy)
 	{
 		det_value = det_value * value_diag;
 
-		// Деление строки на диагональный элемент:
+		// Г„ГҐГ«ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ Г­Г  Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ:
 		for (size_t col = index_diag; col < Copy.get_cSize(); col++)
 		{
 			Copy.at(index_diag, col) /= value_diag;
@@ -82,11 +82,11 @@ void row_sub(const unsigned int index_diag, double& det_value, Matrix& Copy)
 // -1) The private geter gets a linear index:
 unsigned int Matrix::get_index(unsigned int row, unsigned int col) const
 {
-	// n = i - 1 + (j - 1) * rown    в случае, если i in [1, rown], а j in [1, coln]  =>
+	// n = i - 1 + (j - 1) * rown    Гў Г±Г«ГіГ·Г ГҐ, ГҐГ±Г«ГЁ i in [1, rown], Г  j in [1, coln]  =>
 	// => return row - 1 + (col - 1) * this->rown;
-	// n = i + j * rown		в случае, если i in [0, rown-1], а j in [0, coln-1] =>
+	// n = i + j * rown		Гў Г±Г«ГіГ·Г ГҐ, ГҐГ±Г«ГЁ i in [0, rown-1], Г  j in [0, coln-1] =>
 	// => return row + col * this->rown;
-	// Смотри подробное описание в exel файле задания.
+	// Г‘Г¬Г®ГІГ°ГЁ ГЇГ®Г¤Г°Г®ГЎГ­Г®ГҐ Г®ГЇГЁГ±Г Г­ГЁГҐ Гў exel ГґГ Г©Г«ГҐ Г§Г Г¤Г Г­ГЁГї.
 
 	//assert((col < this->coln) && "ERROR_MATRIX_INDEX_IS_OUT_SIZE"); // assert(bool = true)
 	//assert((row < this->rown) && "ERROR_MATRIX_INDEX_IS_OUT_SIZE");
@@ -94,7 +94,7 @@ unsigned int Matrix::get_index(unsigned int row, unsigned int col) const
 	return row + col * this->rown;
 }
 
-// 1) Сonstructors:
+// 1) Г‘onstructors:
 Matrix::Matrix() : values({ 10.0, -1.0, 1.0, 10.0 }), rown(2), coln(2) {}
 
 Matrix::Matrix(unsigned int rown, unsigned int coln) : coln(coln), rown(rown), values(coln* rown) {}
@@ -149,10 +149,10 @@ const Matrix Matrix::set_column(const unsigned int col, const Matrix& column) co
 	return Res;
 }
 
-// Функция рассчёта определителя методом исключения Гаусса.
-// Если приисать - готовая функция для метода подстановок (исключения)
-// для метода LU разложения в словер.
-// Если брать в дальнеёшую раоту, то необходимо причесать, разбив на функции.
+// Г”ГіГ­ГЄГ¶ГЁГї Г°Г Г±Г±Г·ВёГІГ  Г®ГЇГ°ГҐГ¤ГҐГ«ГЁГІГҐГ«Гї Г¬ГҐГІГ®Г¤Г®Г¬ ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГї ГѓГ ГіГ±Г±Г .
+// Г…Г±Г«ГЁ ГЇГ°ГЁГЁГ±Г ГІГј - ГЈГ®ГІГ®ГўГ Гї ГґГіГ­ГЄГ¶ГЁГї Г¤Г«Гї Г¬ГҐГІГ®Г¤Г  ГЇГ®Г¤Г±ГІГ Г­Г®ГўГ®ГЄ (ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГї)
+// Г¤Г«Гї Г¬ГҐГІГ®Г¤Г  LU Г°Г Г§Г«Г®Г¦ГҐГ­ГЁГї Гў Г±Г«Г®ГўГҐГ°.
+// Г…Г±Г«ГЁ ГЎГ°Г ГІГј Гў Г¤Г Г«ГјГ­ГҐВёГёГіГѕ Г°Г Г®ГІГі, ГІГ® Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГЇГ°ГЁГ·ГҐГ±Г ГІГј, Г°Г Г§ГЎГЁГў Г­Г  ГґГіГ­ГЄГ¶ГЁГЁ.
 const double Matrix::det() const
 {
 	// 0. Checking of the sizes:
@@ -175,10 +175,10 @@ const double Matrix::det() const
 
 	while (index_diag < Copy.get_rSize())
 	{
-		// Проверка на нулевой диагональный элемент:
+		// ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г­ГіГ«ГҐГўГ®Г© Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ:
 		if (Copy.at(index_diag, index_diag) == 0.0)
 		{
-			// Поиск ненулевого элента в столбце, лежащего ниже:
+			// ГЏГ®ГЁГ±ГЄ Г­ГҐГ­ГіГ«ГҐГўГ®ГЈГ® ГЅГ«ГҐГ­ГІГ  Гў Г±ГІГ®Г«ГЎГ¶ГҐ, Г«ГҐГ¦Г Г№ГҐГЈГ® Г­ГЁГ¦ГҐ:
 //**********// call swap_rows(...)
 			unsigned int index2swap = index_diag;
 			while ((index2swap < Copy.get_rSize()) && (Copy.at(index2swap, index_diag) == 0.0))
@@ -186,14 +186,14 @@ const double Matrix::det() const
 				index2swap = index2swap + 1;
 			}
 
-			// Проверка иссключения, если все элементы - нулевые => det = 0
+			// ГЏГ°Г®ГўГҐГ°ГЄГ  ГЁГ±Г±ГЄГ«ГѕГ·ГҐГ­ГЁГї, ГҐГ±Г«ГЁ ГўГ±ГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ» - Г­ГіГ«ГҐГўГ»ГҐ => det = 0
 			// swap_rows(...) -> false => return det_value = 0.0;
 			// swap_rows(...) -> true => det_value = det_value * (-1.0);
 			if (index2swap == Copy.get_rSize())
 			{
 				return det_value = 0.0;
 			}
-			// Перестановка строк местами:
+			// ГЏГҐГ°ГҐГ±ГІГ Г­Г®ГўГЄГ  Г±ГІГ°Г®ГЄ Г¬ГҐГ±ГІГ Г¬ГЁ:
 			else
 			{
 				double buffer_value;
@@ -204,24 +204,24 @@ const double Matrix::det() const
 					Copy.at(index2swap, col) = buffer_value;
 				}
 
-				det_value = det_value * (-1.0); // т.к. при перестанове строк необходимо поменять определитель местами
+				det_value = det_value * (-1.0); // ГІ.ГЄ. ГЇГ°ГЁ ГЇГҐГ°ГҐГ±ГІГ Г­Г®ГўГҐ Г±ГІГ°Г®ГЄ Г­ГҐГ®ГЎГµГ®Г¤ГЁГ¬Г® ГЇГ®Г¬ГҐГ­ГїГІГј Г®ГЇГ°ГҐГ¤ГҐГ«ГЁГІГҐГ«Гј Г¬ГҐГ±ГІГ Г¬ГЁ
 			}
 		}
 
-		// Процесс исключения (будет запущен, только если) det != 0
+		// ГЏГ°Г®Г¶ГҐГ±Г± ГЁГ±ГЄГ«ГѕГ·ГҐГ­ГЁГї (ГЎГіГ¤ГҐГІ Г§Г ГЇГіГ№ГҐГ­, ГІГ®Г«ГјГЄГ® ГҐГ±Г«ГЁ) det != 0
 //******// call row_sub(...)
 		value_diag = Copy.at(index_diag, index_diag);
 
 		det_value = det_value * value_diag;
 
-		// Деление строки на диагональный элемент:
+		// Г„ГҐГ«ГҐГ­ГЁГҐ Г±ГІГ°Г®ГЄГЁ Г­Г  Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Г© ГЅГ«ГҐГ¬ГҐГ­ГІ:
 		for (size_t col = index_diag; col < Copy.get_cSize(); col++)
 		{
 			Copy.at(index_diag, col) /= value_diag;
 		}
 		//******// end call row_sub(...)
 
-				// Исключение элементов лежащих ниже диагональных:
+				// Г€Г±ГЄГ«ГѕГ·ГҐГ­ГЁГҐ ГЅГ«ГҐГ¬ГҐГ­ГІГ®Гў Г«ГҐГ¦Г Г№ГЁГµ Г­ГЁГ¦ГҐ Г¤ГЁГ ГЈГ®Г­Г Г«ГјГ­Г»Гµ:
 		//******// call column_reset(...)
 		double swaped_value;
 		for (size_t row = index_diag + 1; row < Copy.get_rSize(); row++)
@@ -249,14 +249,14 @@ const double Matrix::norm() const
 
 Matrix& Matrix::operator=(const Matrix& Any)
 {
-	// Использование перегрузки опреатора Matrix& Matrix::operator=(const Matrix& Any),
-	// возвращающего ссылку на объект, а не объект, позволяет выполнять цепочку присвоений!
+	// Г€Г±ГЇГ®Г«ГјГ§Г®ГўГ Г­ГЁГҐ ГЇГҐГ°ГҐГЈГ°ГіГ§ГЄГЁ Г®ГЇГ°ГҐГ ГІГ®Г°Г  Matrix& Matrix::operator=(const Matrix& Any),
+	// ГўГ®Г§ГўГ°Г Г№Г ГѕГ№ГҐГЈГ® Г±Г±Г»Г«ГЄГі Г­Г  Г®ГЎГєГҐГЄГІ, Г  Г­ГҐ Г®ГЎГєГҐГЄГІ, ГЇГ®Г§ГўГ®Г«ГїГҐГІ ГўГ»ГЇГ®Г«Г­ГїГІГј Г¶ГҐГЇГ®Г·ГЄГі ГЇГ°ГЁГ±ГўГ®ГҐГ­ГЁГ©!
 	//
-	// Для того, чтобы вернуть ссылку на объект, определяемый в теле используйте return *this;
+	// Г„Г«Гї ГІГ®ГЈГ®, Г·ГІГ®ГЎГ» ГўГҐГ°Г­ГіГІГј Г±Г±Г»Г«ГЄГі Г­Г  Г®ГЎГєГҐГЄГІ, Г®ГЇГ°ГҐГ¤ГҐГ«ГїГҐГ¬Г»Г© Гў ГІГҐГ«ГҐ ГЁГ±ГЇГ®Г«ГјГ§ГіГ©ГІГҐ return *this;
 
-	// 0. Проверка на самоприсвоение.
-	// Чтобы не выполнять лишнее копирование.
-	// Возвращает ссылку на текщий объект.
+	// 0. ГЏГ°Г®ГўГҐГ°ГЄГ  Г­Г  Г±Г Г¬Г®ГЇГ°ГЁГ±ГўГ®ГҐГ­ГЁГҐ.
+	// Г—ГІГ®ГЎГ» Г­ГҐ ГўГ»ГЇГ®Г«Г­ГїГІГј Г«ГЁГёГ­ГҐГҐ ГЄГ®ГЇГЁГ°Г®ГўГ Г­ГЁГҐ.
+	// Г‚Г®Г§ГўГ°Г Г№Г ГҐГІ Г±Г±Г»Г«ГЄГі Г­Г  ГІГҐГЄГ№ГЁГ© Г®ГЎГєГҐГЄГІ.
 	if (this == &Any)
 	{
 		return *this;
@@ -299,14 +299,45 @@ Matrix operator-(const Matrix& left, const Matrix& right)
 	assert((left.get_rSize() == right.get_rSize()) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
 	assert((left.get_cSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
 	assert((left.get_rSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
+	Matrix result(left.get_rSize(), left.get_cSize());
 
-	return Matrix();
+	for (size_t j = 0; j < right.get_cSize(); j++)
+	{
+		for (size_t i = 0; i < right.get_rSize(); i++)
+		{
+			result.at(i, j) = left.at(i, j) - right.at(i, j);
+		}
+	}
+
+	return result();
+	//return Matrix();
 }
 
 Matrix operator*(const Matrix& left, const Matrix& right)
 {
+	
+	
 	// 0. Checking of the sizes:
+	assert((left.get_cSize() == right.get_cSize()) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
+	assert((left.get_rSize() == right.get_rSize()) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
+	assert((left.get_cSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
+	assert((left.get_rSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
+	
+	Matrix result(left.get_rSize(), left.get_cSize());
+	for (size_t j = 0; j < right.get_cSize(); j++)
+	{
+		for (size_t i = 0; i < right.get_rSize(); i++)
+		{
 
+			for (size_t k = 0; k < right.get_rSize(); k++) 
+			{
+				result.at(i, j) += left.at(i, k) * right.at(k, j);
+			}
+			
+		}
+	}
+ 
+	return result;
 
-	return Matrix();
+	//return Matrix();
 }
