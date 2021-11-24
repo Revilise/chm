@@ -309,7 +309,7 @@ Matrix operator-(const Matrix& left, const Matrix& right)
 		}
 	}
 
-	return result();
+	return result;
 	//return Matrix();
 }
 
