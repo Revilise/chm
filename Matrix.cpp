@@ -309,7 +309,7 @@ Matrix operator-(const Matrix& left, const Matrix& right)
 		}
 	}
 
-	return result();
+	return result;
 	//return Matrix();
 }
 
@@ -330,7 +330,7 @@ Matrix operator*(const Matrix& left, const Matrix& right)
 
 			for (size_t k = 0; k < left.get_cSize(); k++) 
 			{
-				result.at(i, j) += left.at(i, k) * right.at(k, j);
+				result.at(j, i) += left.at(j, k) * right.at(k, i);
 			}
 			
 		}

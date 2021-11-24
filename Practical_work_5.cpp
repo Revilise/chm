@@ -102,26 +102,28 @@ int main()
     // Отключить все макросы необходимо добавив дерективу дял препроцессора в этом файле.
     // Добавление директивы пропусти добавление всех строк содержащих assert.
 
-    std::string way = "G:/чм/9.txt";
+    std::string way = "C:\\Users\\alina\\OneDrive\\Документы\\Библиотека\\Численные методы\\ПР5\\Варианты матриц коэффициентов\\9.txt";
     
     Matrix A = read(way);
     Matrix x_exist = get_x_exist(A.get_cSize());
-    Matrix b = A * x_exist;
+	Matrix b = A * x_exist;
 
-	std::printf("x_exist =\n");
-	print(x_exist);
+	print(b);
+	//std::printf("x_exist =\n");
+	//print(x_exist);
 
 	//std::printf("A =\n");
 	//print(A);
 
 	//std::printf("b =\n");
 	//print(b);
+	//Solver s = Solver(A, b);
+	//print(s.Cramer());
+	//Decomposition dec = Decomposition(A, b);
+	////dec.LU_decomposition();
 
-	Decomposition dec = Decomposition(A, b);
-	dec.LU_decomposition();
-
-	std::printf("LU decomposition X's =\n");
-	print(dec.Gausse());
+	//std::printf("LU decomposition X's =\n");
+	//print(dec.Gausse());
 
     return 0;
 }
