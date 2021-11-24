@@ -19,7 +19,7 @@ private:
 	// -1) The private geter gets a linear index:
 	unsigned int get_index(unsigned int row, unsigned int col) const;	// Почему разумно сделать этот гетер приватным?
 	// Такой подход позволяет скрыть реализацию хранения в виде линейного вектора.
-	// В случае, если способ хранения по каким либо причинам изменить, то интерфейст доступа к элементам класса
+	// В случае, если способ хранения по каким либо причинам изменить, то интерфейс доступа к элементам класса
 	// меняться не будет!
 
 	// 0) Values:
@@ -42,6 +42,10 @@ public:
 	double& at(unsigned int row, unsigned int col);
 	void at(unsigned int row, unsigned int col, const double value);
 	const double& at(unsigned int row, unsigned int col) const;
+
+	const std::vector <double> get_values() {
+		return values;
+	}
 
 	const Matrix set_column(const unsigned int col, const Matrix& column) const;
  

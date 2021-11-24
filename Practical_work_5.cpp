@@ -1,6 +1,8 @@
 ﻿//#define NDEBUG    // инструкция дл препроцессора отключающая макрос assert
 
 #include "Matrix.h"
+#include "Decomposition.h"
+#include "Solver.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -100,20 +102,26 @@ int main()
     // Отключить все макросы необходимо добавив дерективу дял препроцессора в этом файле.
     // Добавление директивы пропусти добавление всех строк содержащих assert.
 
-    std::string way = "I:/чм/9.txt";
+    std::string way = "G:/чм/9.txt";
     
-    Matrix A = read(way); // ошибка тут
+    Matrix A = read(way);
     Matrix x_exist = get_x_exist(A.get_cSize());
     Matrix b = A * x_exist;
 
 	std::printf("x_exist =\n");
 	print(x_exist);
 
-	std::printf("A =\n");
-	print(A);
+	//std::printf("A =\n");
+	//print(A);
 
 	//std::printf("b =\n");
 	//print(b);
+
+	Decomposition dec = Decomposition(A, b);
+	dec.LU_decomposition();
+
+	std::printf("LU decomposition X's =\n");
+	print(dec.Gausse());
 
     return 0;
 }
