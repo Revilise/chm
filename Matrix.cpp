@@ -318,18 +318,17 @@ Matrix operator*(const Matrix& left, const Matrix& right)
 	
 	
 	// 0. Checking of the sizes:
-	assert((left.get_cSize() == right.get_cSize()) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
-	assert((left.get_rSize() == right.get_rSize()) && "ERROR_MATRIXES_SIZES_SHOULD_BE_EQUAL");
+	assert((left.get_rSize() != right.get_cSize()) && "ERROR_MATRIXES_SIZES_AT_ROW_AND_AT_COLUMN_SHOULD_BE_EQUAL");
 	assert((left.get_cSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
 	assert((left.get_rSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
 	
-	Matrix result(left.get_rSize(), left.get_cSize());
-	for (size_t j = 0; j < right.get_cSize(); j++)
+	Matrix result(left.get_rSize(), right.get_cSize());
+	for (size_t j = 0; j < left.get_rSize(); j++)
 	{
-		for (size_t i = 0; i < right.get_rSize(); i++)
+		for (size_t i = 0; i < right.get_cSize(); i++)
 		{
 
-			for (size_t k = 0; k < right.get_rSize(); k++) 
+			for (size_t k = 0; k < left.get_cSize(); k++) 
 			{
 				result.at(i, j) += left.at(i, k) * right.at(k, j);
 			}
