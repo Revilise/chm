@@ -10,6 +10,7 @@ laba5/laba5/
 *.vcxproj
 *.vcxproj.filters
 *.vcxproj.user
+.idea/
 x64/
 
 # User-specific files

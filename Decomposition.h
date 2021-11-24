@@ -14,9 +14,13 @@ private:
 	std::vector <double> values;
 	unsigned int size;
 
+	Matrix A;
+	Matrix B;
+	Matrix LU;
+
 public:
 	// 1) Constructors:
-	Decomposition(const Matrix& any);
+	Decomposition(Matrix& anyA, Matrix& anyB);
 
 	// 2) Destructor:
 	~Decomposition();
@@ -25,11 +29,14 @@ public:
 	const double get_elemL(unsigned int row, unsigned int col) const;
 	const double get_elemU(unsigned int row, unsigned int col) const;
 
-	//const Martix& U(unsigned int row, unsigned int col) const;
-	//const Martix& L(unsigned int row, unsigned int col) const;
-
-	const double get_size() const;
+	//const Matrix& U(unsigned int row, unsigned int col) const;
+	//const Matrix& L(unsigned int row, unsigned int col) const;
 
 	const Matrix get_L() const; // Можно ли подставить const Matrix& (т.е. ссылку на локальный объект)?
 	const Matrix get_U() const; // Можно ли подставить const Matrix& (т.е. ссылку на локальный объект)?
+
+	const double get_size() const;
+
+	const Matrix LU_decomposition();
+	const Matrix Gausse() const;
 };
