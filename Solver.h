@@ -2,6 +2,7 @@
 
 #include "Matrix.h"
 #include "Decomposition.h"
+
 class Solver
 {
 private:
@@ -19,8 +20,12 @@ private:
 
 public:
 	Solver() = delete;
-	Solver(const Matrix& A, const Matrix& b);
+	Solver(std::string way);
 
 	Matrix Cramer();
 	const Matrix FindXWithLU() const; // Найим х через Гаусса
+
+	Matrix get_x_exist(const unsigned int rown);
+	void print(const Matrix& Any);
+	Matrix read(std::string fullway2data);
 };

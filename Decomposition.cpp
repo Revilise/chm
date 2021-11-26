@@ -1,7 +1,6 @@
 #include "Decomposition.h"
 #include <cassert>
 
-
 Decomposition::Decomposition() {
     size = 0;
     LU = Matrix();

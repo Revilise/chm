@@ -310,13 +310,10 @@ Matrix operator-(const Matrix& left, const Matrix& right)
 	}
 
 	return result;
-	//return Matrix();
 }
 
 Matrix operator*(const Matrix& left, const Matrix& right)
 {
-	
-	
 	// 0. Checking of the sizes:
 	assert((left.get_rSize() != right.get_cSize()) && "ERROR_MATRIXES_SIZES_AT_ROW_AND_AT_COLUMN_SHOULD_BE_EQUAL");
 	assert((left.get_cSize() != 0) && "ERROR_MATRIXES_SIZES_SHOULD_BE_NO_ZERO");
@@ -327,16 +324,12 @@ Matrix operator*(const Matrix& left, const Matrix& right)
 	{
 		for (size_t i = 0; i < right.get_cSize(); i++)
 		{
-
 			for (size_t k = 0; k < left.get_cSize(); k++) 
 			{
 				result.at(j, i) += left.at(j, k) * right.at(k, i);
 			}
-			
 		}
 	}
  
 	return result;
-
-	//return Matrix();
 }
