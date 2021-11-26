@@ -15,10 +15,12 @@ private:
 
 	Matrix A; // оставить вот это и забить на остальное.
 	Matrix B;
+	Decomposition LU;
 
 public:
 	Solver() = delete;
 	Solver(const Matrix& A, const Matrix& b);
 
 	Matrix Cramer();
+	const Matrix FindXWithLU() const; // Найим х через Гаусса
 };

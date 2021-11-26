@@ -15,12 +15,12 @@ private:
 	unsigned int size;
 
 	Matrix A;
-	Matrix B;
 	Matrix LU;
 
 public:
 	// 1) Constructors:
-	Decomposition(Matrix& anyA, Matrix& anyB);
+	Decomposition(Matrix& any);
+	Decomposition();
 
 	// 2) Destructor:
 	~Decomposition();
@@ -37,6 +37,5 @@ public:
 
 	const double get_size() const;
 
-	const Matrix LU_decomposition();
-	const Matrix Gausse() const;
+	const void LU_decomposition();
 };

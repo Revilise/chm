@@ -2,17 +2,25 @@
 #include <cassert>
 
 
+Decomposition::Decomposition() {
+    size = 0;
+    LU = Matrix();
+}
+
 // 1) Constructors:
-Decomposition::Decomposition(Matrix& anyA, Matrix& anyB)
+Decomposition::Decomposition(Matrix& any)
 {
     // 0. Checking of sizes. If matrix isn't square then error out!
-    assert((anyA.get_cSize() == anyA.get_rSize()) && "ERROR_MATRIX_IS_NOT_SQUARE");
-    assert((anyA.get_cSize() == 0) && "ERROR_MATRIX_IS_EMPTY");
+    assert((any.get_cSize() == any.get_rSize()) && "ERROR_MATRIX_IS_NOT_SQUARE");
+    assert((any.get_cSize() != 0) && "ERROR_MATRIX_IS_EMPTY");
 
     // 1. The data is set there:
-    this->size = anyA.get_cSize();
-    this->A = anyA;
-    this->B = anyB;
+    this->size = any.get_cSize();
+    LU = Matrix();
+    this->A = any;
+
+    LU = Matrix(any.get_rSize(), any.get_rSize());
+    LU_decomposition();
 
    // this->values = { 10.0, -0.1, 1.0, 10.1 };   //  <- Заменить на LU разложение
     // По умолчанию: (L\U) = { 10.0, -0.1, 1.0, 10.1 } - LU разложение для матрицы А = {10.0, -1.0, 1.0, 10.0}
@@ -32,7 +40,8 @@ const double Decomposition::get_elemL(unsigned int row, unsigned int col) const
     // 0. Checking of the indexes!
     assert(((row < this->size) && (col < this->size)) && "ERROR_MATRIX_INDEX_IS_OUT_SIZE");
 
-    return 0.0;
+    Matrix L = get_L();
+    return L.at(row, col);
 }
 
 const double Decomposition::get_elemU(unsigned int row, unsigned int col) const
@@ -40,7 +49,9 @@ const double Decomposition::get_elemU(unsigned int row, unsigned int col) const
     // 0. Checking of the indexes!
     assert(((row < this->size) && (col < this->size)) && "ERROR_MATRIX_INDEX_IS_OUT_SIZE");
 
-    return 0.0;
+    Matrix U = get_U();
+
+    return U.at(row, col);
 }
 
 const double Decomposition::get_size() const
@@ -48,20 +59,9 @@ const double Decomposition::get_size() const
     return this->size;
 }
 
-const Matrix Decomposition::get_L() const
-{
-    return Matrix();
-}
+const void Decomposition::LU_decomposition() {
 
-const Matrix Decomposition::get_U() const
-{
-    return Matrix();
-}
-
-const Matrix Decomposition::LU_decomposition() {
-    Matrix LU(A.get_rSize(), A.get_rSize());
-
-    if (A.norm() != 0) {
+    //if (A.norm() != 0) {
         for (int k = 0; k < A.get_rSize(); k++) {
             // вычисление первой строки матрицы U
             LU.at(0, k) = A.at(k, 0);
@@ -90,38 +90,32 @@ const Matrix Decomposition::LU_decomposition() {
                 LU.at(i, k) = (A.at(i, k) - sum) / LU.at(i, i);
             }
         }
-        this->LU = LU;
-    }
-    return LU;
-
+    //}
 }
-
-const Matrix Decomposition::Gausse() const {
-
-    Matrix y;
-    y.at(0, 0) = B.at(0, 0);
-
-    // Ly = b
-    for (size_t k = 1; k < LU.get_rSize(); k++) {
-        y.at(k, 0) = B.at(k, 0);
-        for (size_t p = 0; p < k; p++) {
-            y.at(k, 0) -= LU.at(k, p) * y.at(p, 0);
+const Matrix Decomposition::get_L() const
+{
+    Matrix L(size, size);
+    for (size_t i = 0; i < size; i++)
+    {
+        for (size_t k = 0; k < size; k++)
+        {
+            if (i > k) { L.at(i, k) = LU.at(i, k); continue; }
+            if (i == k) { L.at(i, k) = 1; continue; }
+            if (i < k) { L.at(i, k) = 0; }
         }
     }
-
-    // Ux=y
-    Matrix x = Matrix(LU.get_rSize(), 0);
-    int m = LU.get_rSize() - 1;
-    
-    x.at(m, 0) = y.at(m, 0) / LU.at(m, m);
-
-    for (size_t k = LU.get_rSize() - 2; k >= 0; k--) {
-        x.at(k, 0) = y.at(k, 0);
-        for (size_t p = k + 1; p < LU.get_rSize() - 1; p++) {
-            x.at(k, 0) -= LU.at(k, p) * x.at(p, 0);
+    return L;
+}
+const Matrix Decomposition::get_U() const
+{
+    Matrix U(size, size);
+    for (size_t i = 0; i < size; i++)
+    {
+        for (size_t k = 0; k < size; k++)
+        {
+            if (i <= k) { U.at(i, k) = LU.at(i, k); continue; }
+            if (i > k) { U.at(i, k) = 0; }
         }
-        x.at(k, 0) *= 1 / LU.at(k, k);
     }
-
-    return x;
+    return U;
 }
